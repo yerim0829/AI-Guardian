@@ -51,7 +51,7 @@ export default function AddressForm() {
       </TouchableOpacity>
 
       {/* 저장하기 (맨 밑 꽉 차게) */}
-      <TouchableOpacity style={s.saveBtn} onPress={() => router.push("/forms/home")}>
+      <TouchableOpacity style={s.saveBtn} onPress={() => router.push('/forms/mainboard')}>
         <Text style={s.saveText}>저장하기</Text>
       </TouchableOpacity>
     </View>

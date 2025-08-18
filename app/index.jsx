@@ -1,10 +1,42 @@
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { router } from 'expo-router';
 import { MotiText, MotiView } from 'moti';   
-
+import axios from 'axios';
 const baseFont = Platform.select({ ios: 'System', android: 'sans-serif', web: 'system-ui' });
 
 export default function StartScreen() {
+  
+  async function test() {
+
+    const asset = await axios.post("35.216.111.224/message/emergency", {
+      "numOfRows": 10,
+      "pageNo": 1
+
+    }).then(res => console.log(res));
+
+  }
+  async function post() {
+    try {
+        const response = await axios.post("http://35.216.111.224/message/emergency", {
+                "numOfRows": 10,
+                "pageNo": 1
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+        console.log('POST:', response)
+        return response;
+    } catch (error) {
+        console.error(error);
+        return null
+    }
+} 
+post();
+
+  console.log (test ());
   return (
     <View style={s.container}>
       {/* 문구 애니메이션 */}
