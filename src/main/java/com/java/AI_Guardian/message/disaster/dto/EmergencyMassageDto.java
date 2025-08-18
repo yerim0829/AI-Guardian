@@ -13,6 +13,7 @@ public class EmergencyMassageDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    @ToString
     public static class Request {
         private int numOfRows;
         private int pageNo;
