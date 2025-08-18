@@ -4,6 +4,7 @@ import com.java.AI_Guardian.message.dto.TsunamiShelterDto;
 import com.java.AI_Guardian.message.shelter.service.TsunamiShelterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class TsunamiShelterController {
      */
 
     @PostMapping
-    public List<TsunamiShelterDto.Response> tsunamiShelter(TsunamiShelterDto.Request request) {
+    public List<TsunamiShelterDto.Response> tsunamiShelter(@RequestBody TsunamiShelterDto.Request request) {
         return tsunamiShelterService.tsunamiShelter(request);
     }
 }
