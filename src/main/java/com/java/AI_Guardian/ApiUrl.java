@@ -11,8 +11,8 @@ public class ApiUrl {
     private static final String BASE_URL = "https://www.safetydata.go.kr/";
     @Value("${cold.shelter.url}")
     private String coldShelterURL;
-    @Value("${disaster.text.url}")
-    private String disasterURL;
+    @Value("${emergency.text.url}")
+    private String emergencyMessageURL;
     @Value("${tsunami.shelter.url}")
     private String tsunamiShelterURL;
 

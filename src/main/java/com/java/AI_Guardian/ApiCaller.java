@@ -1,5 +1,6 @@
 package com.java.AI_Guardian;
 
+import com.java.AI_Guardian.message.disaster.dto.EmergencyMassageDto;
 import com.java.AI_Guardian.message.dto.ColdShelterDto;
 import com.java.AI_Guardian.message.dto.TsunamiShelterDto;
 import org.springframework.stereotype.Component;
@@ -64,6 +65,21 @@ public class ApiCaller {
                 })
                 .retrieve()
                 .bodyToFlux(TsunamiShelterDto.Response.class)
+                .collectList()
+                .block();  // 동기 호출 (단순 API 호출이면 block() 써도 OK)
+    }
+
+    public List<EmergencyMassageDto.Response> callApi(EmergencyMassageDto.Request request) {
+        return webClient.get()
+                .uri(uriBuilder -> {
+                    uriBuilder.path(apiUrl.getEmergencyMessageURL())
+                            .queryParam("numOfRows", request.getNumOfRows())
+                            .queryParam("pageNo", request.getPageNo())
+                            .queryParam("returnType", "json");
+                    return uriBuilder.build();
+                })
+                .retrieve()
+                .bodyToFlux(EmergencyMassageDto.Response.class)
                 .collectList()
                 .block();  // 동기 호출 (단순 API 호출이면 block() 써도 OK)
     }

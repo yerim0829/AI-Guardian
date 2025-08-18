@@ -1,5 +1,6 @@
 package com.java.AI_Guardian;
 
+import com.java.AI_Guardian.message.disaster.dto.EmergencyMassageDto;
 import com.java.AI_Guardian.message.dto.ColdShelterDto;
 import com.java.AI_Guardian.message.dto.TsunamiShelterDto;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,16 @@ class ApiCallerTest {
                 .endLat("36.6774715")
                 .build();
         List<TsunamiShelterDto.Response> responses = apiCaller.callApi(request);
+        System.out.println("responses = " + responses);
+    }
+
+    @Test
+    void callApiEmergencyMessage() {
+        EmergencyMassageDto.Request request = EmergencyMassageDto.Request.builder()
+                .numOfRows(10)
+                .pageNo(1)
+                .build();
+        List<EmergencyMassageDto.Response> responses = apiCaller.callApi(request);
         System.out.println("responses = " + responses);
     }
 
