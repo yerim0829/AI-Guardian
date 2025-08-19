@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 public class ApiUrl {
 
     private static final String BASE_URL = "https://www.safetydata.go.kr/";
-    @Value("V2/api/DSSP-IF-10804?serviceKey=W3HV579YEDVK850D")
+    @Value("COLDSHELTER_URL")
     private String coldShelterURL;
-    @Value("V2/api/DSSP-IF-10748?serviceKey=54900QA3GC4Z5734")
+    @Value("EMERGENCY_TEXT_URL")
     private String emergencyMessageURL;
-    @Value("V2/api/DSSP-IF-10944?serviceKey=JTVDF9G204FVNN20")
+    @Value("TSUNAMI_URL")
     private String tsunamiShelterURL;
-    @Value("V2/api/DSSP-IF-10941?serviceKey=7MB062LYP8Z2SXNT")
+    @Value("INTEGRATED_URL")
     private String integratedShelterURL;
-    @Value("V2/api/DSSP-IF-10942?serviceKey=6U5P68HBD1J45SUA")
+    @Value("SWELTER_URL")
     private String swelterShelterURL;
-    @Value("V2/api/DSSP-IF-00247?serviceKey=294489N0IAGO30XG")
+    @Value("DISASTER_TEXT_URL")
     private String disasterMessageURL;
 
     public String getBaseUrl() {
