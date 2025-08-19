@@ -9,12 +9,18 @@ import org.springframework.stereotype.Component;
 public class ApiUrl {
 
     private static final String BASE_URL = "https://www.safetydata.go.kr/";
-    @Value("${cold.shelter.url}")
+    @Value("COLDSHELTER_URL")
     private String coldShelterURL;
-    @Value("${emergency.text.url}")
+    @Value("EMERGENCY_TEXT_URL")
     private String emergencyMessageURL;
-    @Value("${tsunami.shelter.url}")
+    @Value("TSUNAMI_URL")
     private String tsunamiShelterURL;
+    @Value("INTEGRATED_URL")
+    private String integratedShelterURL;
+    @Value("SWELTER_URL")
+    private String swelterShelterURL;
+    @Value("DISASTER_TEXT_URL")
+    private String disasterMessageURL;
 
     public String getBaseUrl() {
         return BASE_URL;

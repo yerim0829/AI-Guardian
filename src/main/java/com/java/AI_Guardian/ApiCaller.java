@@ -1,7 +1,10 @@
 package com.java.AI_Guardian;
 
+import com.java.AI_Guardian.message.disaster.dto.DisasterMessageDto;
 import com.java.AI_Guardian.message.disaster.dto.EmergencyMassageDto;
 import com.java.AI_Guardian.message.dto.ColdShelterDto;
+import com.java.AI_Guardian.message.dto.IntegratedShelterDto;
+import com.java.AI_Guardian.message.dto.SwelterShelterDto;
 import com.java.AI_Guardian.message.dto.TsunamiShelterDto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -65,6 +68,69 @@ public class ApiCaller {
                 })
                 .retrieve()
                 .bodyToFlux(TsunamiShelterDto.Response.class)
+                .collectList()
+                .block();  // 동기 호출 (단순 API 호출이면 block() 써도 OK)
+    }
+
+    public List<IntegratedShelterDto.Response> callApi(IntegratedShelterDto.Request integratedShelterDto) {
+        System.out.println("apiUrl.getBaseUrl() = " + apiUrl.getBaseUrl());
+        System.out.println("apiUrl.getIntegratedShelterURL() = " + apiUrl.getIntegratedShelterURL());
+        System.out.println("integratedShelterDto = " + integratedShelterDto);
+
+        return webClient.get()
+                .uri(uriBuilder -> {
+                    uriBuilder.path(apiUrl.getIntegratedShelterURL())
+                            .queryParam("startLot", integratedShelterDto.getStartLot())
+                            .queryParam("endLot", integratedShelterDto.getEndLot())
+                            .queryParam("startLat", integratedShelterDto.getStartLat())
+                            .queryParam("endLat", integratedShelterDto.getEndLat())
+                            .queryParam("numOfRows", integratedShelterDto.getNumOfRows())
+                            .queryParam("pageNo", integratedShelterDto.getPageNo())
+                            .queryParam("resultType", "json");
+                    return uriBuilder.build();
+
+                })
+                .retrieve()
+                .bodyToFlux(IntegratedShelterDto.Response.class)
+                .collectList()
+                .block();  // 동기 호출 (단순 API 호출이면 block() 써도 OK)
+    }
+
+    public List<SwelterShelterDto.Response> callApi(SwelterShelterDto.Request swelterShelterDto) {
+        System.out.println("apiUrl.getBaseUrl() = " + apiUrl.getBaseUrl());
+        System.out.println("apiUrl.getSwelterShelterURL() = " + apiUrl.getSwelterShelterURL());
+        System.out.println("swelterShelterDto = " + swelterShelterDto);
+
+        return webClient.get()
+                .uri(uriBuilder -> {
+                    uriBuilder.path(apiUrl.getSwelterShelterURL())
+                            .queryParam("startLot", swelterShelterDto.getStartLot())
+                            .queryParam("endLot", swelterShelterDto.getEndLot())
+                            .queryParam("startLat", swelterShelterDto.getStartLat())
+                            .queryParam("endLat", swelterShelterDto.getEndLat())
+                            .queryParam("numOfRows", swelterShelterDto.getNumOfRows())
+                            .queryParam("pageNo", swelterShelterDto.getPageNo())
+                            .queryParam("resultType", "json");
+                    return uriBuilder.build();
+
+                })
+                .retrieve()
+                .bodyToFlux(SwelterShelterDto.Response.class)
+                .collectList()
+                .block();  // 동기 호출 (단순 API 호출이면 block() 써도 OK)
+    }
+
+    public List<DisasterMessageDto.Response> callApi(DisasterMessageDto.Request request) {
+        return webClient.get()
+                .uri(uriBuilder -> {
+                    uriBuilder.path(apiUrl.getDisasterMessageURL())
+                            .queryParam("numOfRows", request.getNumOfRows())
+                            .queryParam("pageNo", request.getPageNo())
+                            .queryParam("returnType", "json");
+                    return uriBuilder.build();
+                })
+                .retrieve()
+                .bodyToFlux(DisasterMessageDto.Response.class)
                 .collectList()
                 .block();  // 동기 호출 (단순 API 호출이면 block() 써도 OK)
     }
